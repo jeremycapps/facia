@@ -1,0 +1,31 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://facia.dev/schemas/surface.schema.yaml"
+
+title: Facia Surface
+description: A Facia surface groups conditions for view-agnostic operational rendering.
+type: object
+additionalProperties: false
+
+required:
+  - id
+  - conditions
+
+properties:
+  id:
+    type: string
+    enum:
+      - surface.progress
+      - surface.action
+      - surface.review
+      - surface.control
+      - surface.constraint
+      - surface.acceptance
+    description: One of the six Facia v1 surfaces.
+
+  conditions:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    description: Conditions grouped by this surface.
+    items:
+      $ref: "condition.schema.yaml"
