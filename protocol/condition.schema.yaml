@@ -1,0 +1,30 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://facia.dev/schemas/condition.schema.yaml"
+
+title: Facia Condition
+description: A Facia condition references one Corus requirement status inside one objective.
+type: object
+additionalProperties: false
+
+required:
+  - objective
+  - requirement
+  - status
+
+properties:
+  objective:
+    type: string
+    pattern: "^objective\\.[a-z0-9_\\.:-]+$"
+    description: Stable Corus objective identifier.
+
+  requirement:
+    type: string
+    pattern: "^requirement\\.[a-z0-9_\\.:-]+$"
+    description: Stable Corus requirement identifier.
+
+  status:
+    type: string
+    enum:
+      - satisfied
+      - unsatisfied
+    description: Corus requirement status within the objective.
