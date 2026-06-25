@@ -1,0 +1,42 @@
+surfaces:
+  - id: surface.progress
+    conditions:
+      - objective: objective.client_review
+        requirement: requirement.hero_layout_done
+        status: satisfied
+
+      - objective: objective.client_review
+        requirement: requirement.nav_decision_complete
+        status: unsatisfied
+
+  - id: surface.control
+    conditions:
+      - objective: objective.client_review
+        requirement: requirement.nav_decision_complete
+        status: unsatisfied
+
+  - id: surface.review
+    conditions:
+      - objective: objective.client_review
+        requirement: requirement.hero_layout_done
+        status: satisfied
+
+      - objective: objective.client_review
+        requirement: requirement.nav_decision_complete
+        status: unsatisfied
+
+  - id: surface.constraint
+    conditions:
+      - objective: objective.client_review
+        requirement: requirement.validation_present
+        status: unsatisfied
+
+  - id: surface.acceptance
+    conditions:
+      - objective: objective.client_review
+        requirement: requirement.validation_present
+        status: unsatisfied
+
+      - objective: objective.client_review
+        requirement: requirement.nav_decision_complete
+        status: unsatisfied
