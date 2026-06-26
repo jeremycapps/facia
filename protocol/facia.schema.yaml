@@ -1,0 +1,86 @@
+version: 2
+
+uses:
+  coordinate:
+    description: Align ownership, authority, sequencing, handoff, or priority.
+
+  implement:
+    description: Produce, change, fix, or execute something.
+
+  verify:
+    description: Review, validate, accept, or prove something.
+
+condition:
+  description: Reference to an objective-scoped requirement status produced by Corus.
+  path_format: "{objective}/{requirement}/{status}"
+  required:
+    - objective
+    - requirement
+    - status
+  fields:
+    objective:
+      type: string
+    requirement:
+      type: string
+    status:
+      type: enum
+      values:
+        - satisfied
+        - unsatisfied
+
+route:
+  description: Rule that maps an active condition to a use.
+  required:
+    - id
+    - match
+    - use
+  fields:
+    id:
+      type: string
+    match:
+      type: object
+      fields:
+        domain:
+          type: string
+        type:
+          type: string
+        status:
+          type: enum
+          values:
+            - satisfied
+            - unsatisfied
+        downstream:
+          type: object_or_none
+    use:
+      type: enum
+      values:
+        - coordinate
+        - implement
+        - verify
+    reason:
+      type: string
+
+surface:
+  description: Grouped active conditions for one use.
+  required:
+    - use
+    - conditions
+  fields:
+    use:
+      type: enum
+      values:
+        - coordinate
+        - implement
+        - verify
+    conditions:
+      type: list
+
+completion:
+  rule: "Satisfied conditions with no downstream use do not surface."
+
+boundaries:
+  - Facia does not define program paths.
+  - Facia does not define domain meaning.
+  - Facia does not record moments.
+  - Facia does not evaluate satisfaction.
+  - Facia does not render views.
