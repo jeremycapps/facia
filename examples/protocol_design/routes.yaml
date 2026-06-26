@@ -1,0 +1,33 @@
+routes:
+  - id: route.schema_change_unsatisfied_to_implement
+    match:
+      domain: domain.protocol_design
+      type: schema_change
+      status: unsatisfied
+    use: implement
+    reason: The domain-bound schema change has not been completed.
+
+  - id: route.schema_change_satisfied_requires_review_to_verify
+    match:
+      domain: domain.protocol_design
+      type: schema_change
+      status: satisfied
+      downstream:
+        requires_review: true
+    use: verify
+    reason: The schema change exists but still requires review before it can be trusted.
+
+  - id: route.schema_change_satisfied_creates_handoff_to_coordinate
+    match:
+      domain: domain.protocol_design
+      type: schema_change
+      status: satisfied
+      downstream:
+        creates_handoff: true
+    use: coordinate
+    reason: The schema change is complete but changes ownership, sequencing, or next-step routing.
+
+surfaces:
+  - use: implement
+    conditions:
+      - objective.facia_v2/requirement.surface_model_updated/unsatisfied
